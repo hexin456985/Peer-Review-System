@@ -1,0 +1,80 @@
+version: '3'
+services:
+  mysql-db:
+    image: registry.cn-hangzhou.aliyuncs.com/group17/mysql-db:latest
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=thesis
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  gateway:
+    image: registry.cn-hangzhou.aliyuncs.com/group17/gateway:latest
+    ports:
+      - "9999:9999"
+
+  eureka:
+    image: registry.cn-hangzhou.aliyuncs.com/group17/eureka:latest
+    ports:
+      - "7887:7887"
+
+  conferences-serve:
+    depends_on:
+      - mysql-db
+      - gateway
+    image: registry.cn-hangzhou.aliyuncs.com/group17/conferences-serve:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/thesis
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "10004:10004"
+
+  paper-serve:
+    depends_on:
+      - mysql-db
+      - gateway
+    image: registry.cn-hangzhou.aliyuncs.com/group17/paper-serve:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/thesis
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "10005:10005"
+
+  role-serve:
+    depends_on:
+      - mysql-db
+      - gateway
+    image: registry.cn-hangzhou.aliyuncs.com/group17/role-serve:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/thesis
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "10001:10001"
+
+  user-serve:
+    depends_on:
+      - mysql-db
+      - gateway
+    image: registry.cn-hangzhou.aliyuncs.com/group17/user-serve:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/thesis
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "10002:10002"
+
+  frontend:
+    depends_on:
+      - conferences-serve
+      - paper-serve
+      - role-serve
+      - user-serve
+      - gateway
+    image: registry.cn-hangzhou.aliyuncs.com/group17/frontend:latest
+    ports:
+      - "8889:8889"
