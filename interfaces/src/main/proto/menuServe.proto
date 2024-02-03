@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.menuserve.proto";
+option java_outer_classname = "menuProto";
+
+service MenuService {
+  rpc getMenuListByUserId(MenuRequest) returns (MenuResponse);
+}
+
+message MenuRequest {
+  int32 userId = 1;
+}
+
+message MenuResponse {
+  repeated Menu menuList = 1;
+}
+
+message Menu {
+  int32 menuId = 1;
+  string component = 2;
+  string path = 3;
+  string redirect = 4;
+  string name = 5;
+  string title = 6;
+  string icon = 7;
+  int32 parentId = 8;
+  string isLeaf = 9;
+  bool hidden = 10;
+  repeated Menu children = 11;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.userroleserve.proto";
+option java_outer_classname = "userRoleProto";
+
+service UserRoleService {
+  rpc checkUserRole(UserRoleRequest) returns (UserRoleResponse);
+  rpc insertUserRole(UserRoleInsertRequest) returns (UserRoleInsertResponse);
+}
+
+message UserRoleRequest {
+  int32 roleId = 1;
+  int32 userId = 2;
+}
+
+message UserRoleResponse {
+  bool userHasRole = 1;
+}
+
+message UserRoleInsertRequest {
+  int32 userId = 1;
+  int32 roleId = 2;
+}
+
+message UserRoleInsertResponse {
+  bool success = 1;
+}

@@ -1,0 +1,45 @@
+spring:
+  profiles:
+    active: docker
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/thesis
+  redis:
+    port: 6379
+    host: redis
+  application:
+    name: conference-serve
+
+logging:
+  level:
+    com.micro.conferencesserve: debug
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+  type-aliases-package: com.micro.conferencesserve.*.entity
+
+grpc:
+  client:
+    user-serve:
+      address: static://localhost:9090
+      negotiation-type: plaintext
+    paper-serve:
+      address: static://localhost:9095
+      negotiation-type: plaintext
+  server:
+    port: 9094
+
+server:
+  port: 10004
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7887/eureka/
+  instance:
+    prefer-ip-address: true

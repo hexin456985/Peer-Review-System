@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.paperConferenceServe.proto";
+option java_outer_classname = "paperConferenceProto";
+
+service PaperConferenceService {
+  rpc getPaperStatus (GetPaperStatusRequest) returns (GetPaperStatusResponse);
+}
+
+message GetPaperStatusRequest {
+  int32 conferenceId = 1;
+}
+
+message GetPaperStatusResponse {
+  repeated int32 state = 1;
+}

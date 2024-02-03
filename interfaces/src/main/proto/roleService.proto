@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.roleserve.proto";
+option java_outer_classname = "roleProto";
+
+service RoleService {
+  rpc getRoleIdByName (GetRoleIdByNameRequest) returns (GetRoleIdByNameResponse);
+}
+
+message GetRoleIdByNameRequest {
+  string roleName = 1;
+}
+
+message GetRoleIdByNameResponse {
+  int32 roleId = 1;
+}

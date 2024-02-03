@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.conferenceserve.proto";
+option java_outer_classname = "conferenceProto";
+
+service ConferenceService {
+  rpc GetConferenceById (GetConferenceRequest) returns (Conference);
+  rpc GetChairIdByConferenceId(getChairIdByConferenceIdRequest) returns (getChairIdByConferenceIdResponse);
+}
+
+service PcmemberService {
+  rpc SetAttributeValue(setPaperPcMemberState) returns (setResult);
+  rpc GetPcmemberIdByUserId(getPcmemberIdByUserIdRequest) returns (getPcmemberIdByUserIdResponse);
+}
+
+message GetConferenceRequest {
+  int32 conferenceId = 1;
+}
+
+message Conference {
+  int32 conferenceId = 1;
+  int32 chairId = 2;
+  string shortName = 3;
+  string fullName = 4;
+  string eventDate = 5;
+  string eventLocation = 6;
+  string submissionDeadline = 7;
+  string reviewresultDate = 8;
+  string status = 9;
+}
+
+message setPaperPcMemberState {
+  int32 userId = 1;
+  int32 paperId = 2;
+  int32 conferenceId = 3;
+}
+
+message setResult {
+  bool success = 1;
+}
+
+message getPcmemberIdByUserIdRequest {
+  int32 userId = 1;
+  int32 conferenecId = 2;
+}
+
+message getPcmemberIdByUserIdResponse {
+  int32 pcmemberId = 1;
+}
+
+message getChairIdByConferenceIdRequest {
+  int32 conferenceId = 1;
+}
+
+message getChairIdByConferenceIdResponse {
+  int32 chairId = 1;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.paperTopicsServe.proto";
+option java_outer_classname = "paperTopicsProto";
+
+service PaperTopicsService {
+  rpc getAllPapersIdByTopicId (GetAllPapersIdByTopicIdRequest) returns (GetAllPapersIdByTopicIdResponse);
+}
+
+message GetAllPapersIdByTopicIdRequest {
+  int32 topicId = 1;
+}
+
+message GetAllPapersIdByTopicIdResponse {
+  repeated int32 paperId = 1;
+}

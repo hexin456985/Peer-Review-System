@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/thesis
+  application:
+    name: conference-serve
+  zipkin:
+    baseUrl: http://zipkin:9411/
+
+logging:
+  level:
+    com.micro.conferencesserve: debug
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+  type-aliases-package: com.micro.conferencesserve.*.entity
+
+grpc:
+  client:
+    user-serve:
+      address: static://user-serve:9090
+      negotiation-type: plaintext
+    paper-serve:
+      address: static://paper-serve:9095
+      negotiation-type: plaintext
+  server:
+    port: 9094
+
+server:
+  port: 10004
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:7887/eureka/
+  instance:
+    prefer-ip-address: true

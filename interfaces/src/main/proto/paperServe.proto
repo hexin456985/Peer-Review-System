@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.micro.paperServe.proto";
+option java_outer_classname = "paperProto";
+
+service PaperService {
+  rpc getAllPapersIdByConferenceId (GetAllPapersIdByConferenceIdRequest) returns (GetAllPapersIdByConferenceIdResponse);
+  rpc updatePaperStateToComplete (UpdatePaperStateToCompleteRequest) returns (UpdatePaperStateToCompleteResponse);
+  rpc updatePaperStateToReviewing (UpdatePaperStateToReviewingRequest) returns (UpdatePaperStateToReviewingResponse);
+  rpc updatePaperStateToQualified (UpdatePaperStateToQualifiedRequest) returns (UpdatePaperStateToQualifiedResponse);
+  rpc getAllPapersStatusByConferenceId (GetAllPapersStatusByConferenceIdRequest) returns (GetAllPapersStatusByConferenceIdResponse);
+  rpc getAllPapersReviewByConferenceId (GetAllPapersReviewByConferenceIdRequest) returns (GetAllPapersReviewByConferenceIdResponse);
+}
+
+message GetAllPapersIdByConferenceIdRequest {
+  int32 conferenceId = 1;
+}
+
+message GetAllPapersIdByConferenceIdResponse {
+  repeated int32 paperId = 1;
+}
+
+message GetAllPapersStatusByConferenceIdRequest {
+  int32 conferenceId = 1;
+}
+
+message GetAllPapersStatusByConferenceIdResponse {
+  repeated string status = 1;
+}
+
+
+message GetAllPapersReviewByConferenceIdRequest {
+  int32 conferenceId = 1;
+}
+
+message GetAllPapersReviewByConferenceIdResponse {
+  repeated int32 reviewScore = 1;
+}
+
+message UpdatePaperStateToCompleteRequest {
+  int32 paperId = 1;
+}
+
+message UpdatePaperStateToCompleteResponse {
+  bool success = 1;
+}
+
+message UpdatePaperStateToReviewingRequest {
+  int32 conferenceId = 1;
+}
+
+message UpdatePaperStateToReviewingResponse {
+  bool success = 1;
+}
+
+message UpdatePaperStateToQualifiedRequest {
+  int32 conferenceId = 1;
+}
+
+message UpdatePaperStateToQualifiedResponse {
+  bool success = 1;
+}

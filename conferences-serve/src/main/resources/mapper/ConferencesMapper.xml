@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micro.conferencesserve.sys.mapper.ConferencesMapper">
+<!--    <update id="updateConferencesStatus" parameterType="com.micro.conferencesserve.sys.entity.Conference">-->
+<!--        UPDATE conferences-->
+<!--        SET status = #{status}-->
+<!--        WHERE conference_id = #{conferenceId}-->
+<!--    </update>-->
+</mapper>

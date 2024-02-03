@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    active: docker
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/thesis
+  redis:
+    port: 6379
+    host: redis
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 50MB
+  application:
+    name: paper-serve
+
+logging:
+  level:
+    com.micro.roleserve: debug
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+  type-aliases-package: com.micro.roleserve.*.entity
+
+server:
+  port: 10005
+
+grpc:
+  server:
+    port: 9095
+  client:
+    conference-serve:
+      address: static://localhost:9094
+      negotiation-type: plaintext
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7887/eureka/
+  instance:
+    prefer-ip-address: true
